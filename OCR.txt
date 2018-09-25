@@ -15,7 +15,7 @@
 	git clone https://github.com/tmbdev/ocropy
 
 		1.3.1 Module
-		# Frakturmodell und Englischmodell downloaden
+		# Frakturmodell installieren
 		cd ocropy
 		mv ~/Downloads/occu-toolkit/fraktur.pyrnn.gz models/
 
