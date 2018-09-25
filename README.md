@@ -12,3 +12,5 @@ from:  http://www.mdz-nbn-resolving.de/urn/resolver.pl?urn=urn:nbn:de:bvb:12-bsb
 digital page: 340 
 ## fraktur.pyrnn.gz
 Fraktur-Model trained with Charset of Zedlers Universallexikon
+## Trainingdata
+Folders models, testing, training for calculating error rates
