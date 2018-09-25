@@ -1,0 +1,112 @@
+1. Pakete
+	1.1 Git
+	# Git, Imagemagick und Scantailor installieren
+	sudo apt-get install git imagemagick scantailor
+
+	1.2 Ocropy
+	# Verzeichnis wechseln und Ocropy downloaden
+	cd ~/Downloads
+	git clone https://github.com/tmbdev/ocropy
+
+		1.2.1 Module
+		# Frakturmodell und Englischmodell downloaden
+		cd ocropy/models
+		wget http://tmbdev.net/ocropy/fraktur.pyrnn.gz
+		wget http://www.tmbdev.net/en-default.pyrnn.gz
+
+	
+		1.2.2 Installation [systemweit]
+		# Verzeichnis wechseln, Abhängigkeiten installieren und Ocropy installieren
+		# Ocropyprogramme werden in /usr/local/bin und die OCR-Module nach /usr/local/share/ocropy installiert
+		cd ~/Downloads/ocropy
+		sudo apt-get install $(cat PACKAGES)
+		sudo python setup.py install
+
+	1.3 Helferlein
+	#Skripte zur automatischen Konvertierung,OCR-Pipeline und Fehlerratenberechnung
+	cd ~/Downloads
+	git clone https://github.com/rnsrk/occu-toolkit
+	sudo mv occu-toolkit/{ocr-conv.bash,ocr-png2html.bash,error_rate_writer.sh,errors.sh} /usr/local/bin/
+
+2. Preprocessing
+	2.1 Vorbereitung
+	# ocr-Ordner erstellen und hineinwechseln
+	mkdir ~/ocr-files
+	cd ~/ocr-files
+
+	# Roh-daten hineinkopieren
+
+	2.2 Scantailor
+		2.2.1 Seite aufteilen
+		# Nach Spalten auftrennen
+		Seitenlayout?
+		Trennlinie?
+		2.2.2 Inhalt auswählen
+		2.2.3 Stege (Ränder)
+		Stege (Ränder) kleiner?
+		Ausrichtung -> abwählen "Größe an andere Seiten anpassen"
+		2.2.4 Ausgabe
+		Bereiche füllen?
+
+3. Erkennen
+	3.1 Konvertierung
+	# Konvertierung in png + 6-stellige Laufnummer geben
+	ocr-conv.bash
+
+	3.2 Zeilensegmentierung, Erkennung, Umformung in HTML
+	# Zeilensegmentierung, Erkennung, Umformung in HTML
+	ocr-png2html.bash
+
+	# Dabei werden drei Ocropusmodule automatisch ausgeführt:
+		
+		3.2.1 ocropus-gpageseg
+		# Zeilensegmentierung
+
+		# -n | keine Fehlerausgabe
+		# --maxcolseps 0 | keine Leerzeilen-Spaltentrenner
+		# --maxseps 0 | keine schwarzen Spaltentrenner
+		# -Q 4 | 4 Prozessorkerne nutzen ?führt manchmal zum Aufhängen des PC?
+
+		3.2.1 ocropus-rpred 
+		# Texterkennung | HIER passendes Modul eintragen
+
+		# -n | keine Fehlerausgabe
+		# -m fraktur.pyrnn.gz | Erkennungsmodul fraktur.pyrnn.gz, wie in usr/local/share/ocropy abgelegt
+		# -Q 4 | 4 Prozessorkerne nutzen ?führt manchmal zum Aufhängen des PC?
+
+		3.2.2 ocropus-gtedit
+		# Korrektur HTML erstellen
+
+		# html ocr/??????/??????.bin.png | alle Bilddateien in der Ordnungstruktur ocr/??????/??????.bin.png
+		# -o correction.html | Ausgabedatei correction.html 
+
+4. Korrigieren
+# html öffnen, korrigieren und SPEICHERN!
+
+5. Umformung in Text
+	# HTML extrahieren
+	ocropus-gtedit extract *.html
+	cat ocr/??????/??????.gt.txt > ocr.txt
+
+6. Training
+	6.1 Vorbereitung
+	#Trainingsordner erstellen und hineinwechseln
+	mkdir trainingdata
+	cd trainingdata
+	# Ground Truth in zwei Ordner aufteilen, verhältnis 10:1: training und testing
+	# Ordner erstellen
+	mkdir {models,training,testing}
+	# Trainings- und Testingdaten verteilen
+
+	6.2 Training starten (kann so zwei-drei Tage dauern)
+	# -N | max. 2000000 bearbeitete Trainingszeilen
+	# -F | Speicherfreqenz alle 1000 Zeilen
+	# -o | Ausgabemodul traingsmodul
+	ocropus-rtrain -N 2000000 -F 1000 -o models/traingsmodul training/*.bin.png
+
+	6.3 Passendes Modul finden
+	# Fehlerratenskript starten
+	error_rate_writer.sh
+	# Modul mit niedrigster training/testing-Rate finden
+	# Das Modul mit den geringsten Fehlerraten auswählen und nach usr/local/share/ocropy kopieren
+	errors.csv
