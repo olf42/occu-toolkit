@@ -2,31 +2,31 @@
 	1.1 Git
 	# Git, Imagemagick und Scantailor installieren
 	sudo apt-get install git imagemagick scantailor
+	
+	1.2 Helferlein
+	#Skripte zur automatischen Konvertierung,OCR-Pipeline und Fehlerratenberechnung
+	cd ~/Downloads
+	git clone https://github.com/rnsrk/occu-toolkit
+	sudo mv occu-toolkit/{ocr-conv.bash,ocr-png2html.bash,error_rate_writer.sh,errors.sh} /usr/local/bin/
 
-	1.2 Ocropy
+	1.3 Ocropy
 	# Verzeichnis wechseln und Ocropy downloaden
 	cd ~/Downloads
 	git clone https://github.com/tmbdev/ocropy
 
-		1.2.1 Module
+		1.3.1 Module
 		# Frakturmodell und Englischmodell downloaden
-		cd ocropy/models
-		wget http://tmbdev.net/ocropy/fraktur.pyrnn.gz
-		wget http://www.tmbdev.net/en-default.pyrnn.gz
+		cd ocropy
+		mv ~/Downloads/occu-toolkit/fraktur.pyrnn.gz models/
 
-	
-		1.2.2 Installation [systemweit]
+		1.3.2 Installation [systemweit]
 		# Verzeichnis wechseln, Abhängigkeiten installieren und Ocropy installieren
 		# Ocropyprogramme werden in /usr/local/bin und die OCR-Module nach /usr/local/share/ocropy installiert
 		cd ~/Downloads/ocropy
 		sudo apt-get install $(cat PACKAGES)
 		sudo python setup.py install
 
-	1.3 Helferlein
-	#Skripte zur automatischen Konvertierung,OCR-Pipeline und Fehlerratenberechnung
-	cd ~/Downloads
-	git clone https://github.com/rnsrk/occu-toolkit
-	sudo mv occu-toolkit/{ocr-conv.bash,ocr-png2html.bash,error_rate_writer.sh,errors.sh} /usr/local/bin/
+	
 
 2. Preprocessing
 	2.1 Vorbereitung
@@ -35,7 +35,8 @@
 	cd ~/ocr-files
 
 	# Roh-daten hineinkopieren
-
+	mv ~/Downloads/occu-toolkit/bsb10326116_00340.jpg ~/ocr-files
+	
 	2.2 Scantailor
 		2.2.1 Seite aufteilen
 		# Nach Spalten auftrennen
@@ -97,7 +98,8 @@
 	# Ordner erstellen
 	mkdir {models,training,testing}
 	# Trainings- und Testingdaten verteilen
-
+	mv ~/Downloads/occu-toolkit/{models,training,testing} ./
+	
 	6.2 Training starten (kann so zwei-drei Tage dauern)
 	# -N | max. 2000000 bearbeitete Trainingszeilen
 	# -F | Speicherfreqenz alle 1000 Zeilen
