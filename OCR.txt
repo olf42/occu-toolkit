@@ -53,7 +53,20 @@
 	3.1 Konvertierung
 	# Konvertierung in png + 6-stellige Laufnummer geben
 	ocr-conv.bash
+	
+	# Probleme mit mogrify-im6.q16: memory allocation failed `out/bsb10326116_00340_2R.tif' @ error/tiff.c/ReadTIFFImage 
+	# /1619?
 
+	sudo gedit /etc/ImageMagick-6/policy.xml
+	
+	# Code ändern in
+	<policy domain="resource" name="memory" value="256MiB"/>
+  	<policy domain="resource" name="map" value="2GiB"/>
+  	<policy domain="resource" name="width" value="128KP"/>
+  	<policy domain="resource" name="height" value="128KP"/>
+  	<policy domain="resource" name="area" value="1GiB"/>
+  	<policy domain="resource" name="disk" value="2GiB"/>
+	
 	3.2 Zeilensegmentierung, Erkennung, Umformung in HTML
 	# Zeilensegmentierung, Erkennung, Umformung in HTML
 	ocr-png2html.bash
