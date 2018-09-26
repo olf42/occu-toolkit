@@ -11,7 +11,7 @@ echo "Stufe;Testdata;Traindata" > errors.csv
 for m in models/*.pyrnn.gz; do
 	echo $m
 	n=`echo "$m" | sed 's/^.*-0*//' | sed 's/.pyrnn.gz//'`
-	p1=`./errors.sh $m testing |tail -n 1` 
-	p2=`./errors.sh $m training |tail -n 1` 
+	p1=`errors.sh $m testing |tail -n 1` 
+	p2=`errors.sh $m training |tail -n 1` 
 	echo "${n};${p1};${p2}"  >> errors.csv
 done
