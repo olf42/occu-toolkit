@@ -7,7 +7,7 @@
 	#Skripte zur automatischen Konvertierung,OCR-Pipeline und Fehlerratenberechnung
 	cd ~/Downloads
 	git clone https://github.com/rnsrk/occu-toolkit
-	sudo mv occu-toolkit/{ocr-conv.bash,ocr-png2html.bash,error_rate_writer.sh,errors.sh} /usr/local/bin/
+	sudo cp -r occu-toolkit/{ocr-conv.bash,ocr-png2html.bash,error_rate_writer.sh,errors.sh} /usr/local/bin/
 
 	1.3 Ocropy
 	# Verzeichnis wechseln und Ocropy downloaden
@@ -17,7 +17,7 @@
 		1.3.1 Module
 		# Frakturmodell installieren
 		cd ocropy
-		mv ~/Downloads/occu-toolkit/fraktur.pyrnn.gz models/
+		cp -r ~/Downloads/occu-toolkit/fraktur.pyrnn.gz models/
 
 		1.3.2 Installation [systemweit]
 		# Verzeichnis wechseln, Abhängigkeiten installieren und Ocropy installieren
@@ -35,7 +35,7 @@
 	cd ~/ocr-files
 
 	# Roh-daten hineinkopieren
-	mv ~/Downloads/occu-toolkit/bsb10326116_00340.jpg ~/ocr-files
+	cp -r ~/Downloads/occu-toolkit/bsb10326116_00340.jpg ~/ocr-files
 	
 	2.2 Scantailor
 		2.2.1 Seite aufteilen
@@ -111,7 +111,7 @@
 	# Ordner erstellen
 	mkdir {models,training,testing}
 	# Trainings- und Testingdaten verteilen
-	mv ~/Downloads/occu-toolkit/{models,training,testing} ./
+	cp -r ~/Downloads/occu-toolkit/{models,training,testing} ./
 	
 	6.2 Training starten (kann so zwei-drei Tage dauern)
 	# -N | max. 2000000 bearbeitete Trainingszeilen
