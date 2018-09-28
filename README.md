@@ -14,3 +14,5 @@ digital page: 340
 Fraktur-Model trained with Charset of Zedlers Universallexikon
 ## Trainingdata
 Folders models, testing, training for calculating error rates
+## Link to Prezi
+https://prezi.com/p/xqwfolocpjy3/
