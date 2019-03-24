@@ -1,6 +1,7 @@
 1. Pakete
 	1.1 Git
 	# Git, Imagemagick und Scantailor installieren
+	sudo apt-get update
 	sudo apt-get install git imagemagick scantailor
 	
 	1.2 Helferlein
