@@ -1,13 +1,8 @@
 # occu-toolkit
 
-occu toolkit contains all software and scripts to follow to OCR workshop by [Robert Nasarek]
-(https://github.com/rnsrk). In this workshop you will set up your own virtual machine for OCR 
-using [ocropy](https://github.com/tmbdev/ocropy) on your computer using virtualbox. 
+occu toolkit contains all software and scripts to follow to OCR workshop by [Robert Nasarek](https://github.com/rnsrk). In this workshop you will set up your own virtual machine for OCR using [ocropy](https://github.com/tmbdev/ocropy) on your computer using virtualbox.
 
-It is advised to follow the instructions provided closely, as some script require to be executed
-in specific locations and will not work if your are in another location in the filesystem. The 
-instructions for this workshop can be found in the OCR.txt file, and are supposed to be 
-accompanied with the [presentation](https://prezi.com/p/xqwfolocpjy3/).
+It is advised to follow the instructions provided closely, as some script require to be executed in specific locations and will not work if your are in another location in the filesystem. The instructions for this workshop can be found in the OCR.txt file, and are supposed to be accompanied with the [presentation](https://prezi.com/p/xqwfolocpjy3/).
 
 ## Prequisites
 
